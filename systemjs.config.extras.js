@@ -1,6 +1,6 @@
 /**
  * Add barrels and stuff
- * Adjust as necessary for your application needs.
+ * Adjust as necessary for your com.teamup.application needs.
  */
 // (function (global) {
 //   System.config({

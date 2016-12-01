@@ -33,7 +33,7 @@ exports.config = {
   // For angular tests
   useAllAngular2AppRoots: true,
 
-  // Base URL for application server
+  // Base URL for com.teamup.application server
   baseUrl: 'http://localhost:8080',
 
   // doesn't seem to work.

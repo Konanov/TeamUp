@@ -2,11 +2,11 @@
 [![Build Status][travis-badge]][travis-badge-url]
 
 This repository holds the TypeScript source code of the [angular.io quickstart](https://angular.io/docs/ts/latest/quickstart.html),
-the foundation for most of the documentation samples and potentially a good starting point for your application.
+the foundation for most of the documentation samples and potentially a good starting point for your com.teamup.application.
 
 It's been extended with testing support so you can start writing tests immediately.
 
-**This is not the perfect arrangement for your application. It is not designed for production.
+**This is not the perfect arrangement for your com.teamup.application. It is not designed for production.
 It exists primarily to get you started quickly with learning and prototyping in Angular**
 
 We are unlikely to accept suggestions about how to grow this QuickStart into something it is not.
@@ -69,13 +69,13 @@ npm install
 npm start
 ```
 
-The `npm start` command first compiles the application, 
+The `npm start` command first compiles the com.teamup.application, 
 then simultaneously re-compiles and runs the `lite-server`.
 Both the compiler and the server watch for file changes.
 
 Shut it down manually with `Ctrl-C`.
 
-You're ready to write your application.
+You're ready to write your com.teamup.application.
 
 ### npm scripts
 
@@ -100,7 +100,7 @@ This repo adds both karma/jasmine unit test and protractor end-to-end testing su
 
 These tools are configured for specific conventions described below.
 
-*It is unwise and rarely possible to run the application, the unit tests, and the e2e tests at the same time.
+*It is unwise and rarely possible to run the com.teamup.application, the unit tests, and the e2e tests at the same time.
 We recommend that you shut down one before starting another.*
 
 ### Unit Tests
@@ -111,7 +111,7 @@ Add more `.spec.ts` files as you wish; we configured karma to find them.
 
 Run it with `npm test`
 
-That command first compiles the application, then simultaneously re-compiles and runs the karma test-runner.
+That command first compiles the com.teamup.application, then simultaneously re-compiles and runs the karma test-runner.
 Both the compiler and the karma watch for (different) file changes.
 
 Shut it down manually with `Ctrl-C`.

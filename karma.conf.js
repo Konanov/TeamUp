@@ -56,7 +56,7 @@ module.exports = function(config) {
       { pattern: 'systemjs.config.extras.js', included: false, watched: false },
       'karma-test-shim.js',
 
-      // transpiled application & spec code paths loaded via module imports
+      // transpiled com.teamup.application & spec code paths loaded via module imports
       { pattern: appBase + '**/*.js', included: false, watched: true },
       { pattern: testBase + '**/*.js', included: false, watched: true },
 
