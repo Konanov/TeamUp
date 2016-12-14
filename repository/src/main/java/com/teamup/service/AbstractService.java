@@ -1,11 +1,15 @@
 package com.teamup.service;
 
 import com.teamup.database.AbstractMongo;
+import com.teamup.dto.ParticipantDTO;
 import com.teamup.entities.Mission;
 import com.teamup.entities.Participant;
 import com.teamup.entities.Task;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by user01 on 11/30/16.
@@ -36,6 +40,18 @@ public abstract class AbstractService {
     return db.read(name);
   }
 
+  public void delete(String participantName) {
+    db.delete(participantName);
+  }
+
+  public ParticipantDTO convertParticipant(Participant participant) {
+    return new ParticipantDTO(participant.getName(), participant.getSurname());
+  }
+
+  public List<ParticipantDTO> getAllParticipants() {
+    return db.getAllParticipants().stream().map(this::convertParticipant).collect(Collectors.toList());
+  }
+
   /**
    * Task
    */
@@ -52,18 +68,16 @@ public abstract class AbstractService {
     db.addTask(executor, task);
   }
 
+  public void deleteTask(ObjectId taskId) {
+    db.deleteTask(taskId);
+  }
+
   /**
    * Mission
    */
 
   public void save(Mission mission) {
     this.db.save(mission);
-  }
-
-
-
-  public void delete(String name) {
-    db.delete(name);
   }
 
 

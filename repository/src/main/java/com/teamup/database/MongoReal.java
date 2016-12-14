@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MongoReal extends AbstractMongo {
 
-  MongoReal() {
+  public MongoReal() {
     super();
     this.ds = this.morphia.createDatastore(mongo, "TeamUp_database");
   }

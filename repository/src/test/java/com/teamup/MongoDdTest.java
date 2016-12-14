@@ -60,6 +60,11 @@ public class MongoDdTest {
     Assert.assertEquals(null, serviceTest.read("Вася"));
   }
 
+  @Test
+  public void getAllParticipants() {
+    Assert.assertEquals(2, serviceTest.getAllParticipants().size());
+  }
+
   /*@After
   public void destroyDB() {
     serviceTest.dropDatabase("teamUp");

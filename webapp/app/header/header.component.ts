@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import {Validators, FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'app-header',
@@ -31,12 +32,6 @@ import {Component} from "@angular/core";
               </ul>
             </li>
           </ul>
-          <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-          </form>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Link</a></li>
             <li class="dropdown">

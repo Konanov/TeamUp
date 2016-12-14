@@ -1,7 +1,11 @@
 package com.teamup.entities;
 
+import com.teamup.security.User;
 import org.bson.types.ObjectId;
-import org.mongodb.morphia.annotations.*;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Transient;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
@@ -10,14 +14,12 @@ import java.util.List;
 
 @Entity("participants")
 @Repository
-public class Participant implements Serializable {
+public class Participant extends User implements Serializable {
 
   @Id
   private ObjectId _id;
   private String name;
   private String surname;
-  private String email;
-  private String password;
   @Transient
   private Task currentTask;
   @Embedded
@@ -31,24 +33,6 @@ public class Participant implements Serializable {
   public Participant(String name, String surname, String email, String password) {
     this.name = name;
     this.surname = surname;
-    this.email = email;
-    this.password = password;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public String getPassword() {
-    return password;
-  }
-
-  public void setPassword(String password) {
-    this.password = password;
   }
 
   public String getSurname() {
@@ -110,19 +94,17 @@ public class Participant implements Serializable {
 
     Participant that = (Participant) o;
 
-    if (!name.equals(that.name)) return false;
-    if (!surname.equals(that.surname)) return false;
-    if (!email.equals(that.email)) return false;
-    return password.equals(that.password);
+    if (_id != null ? !_id.equals(that._id) : that._id != null) return false;
+    if (name != null ? !name.equals(that.name) : that.name != null) return false;
+    return surname != null ? surname.equals(that.surname) : that.surname == null;
 
   }
 
   @Override
   public int hashCode() {
-    int result = name.hashCode();
-    result = 31 * result + surname.hashCode();
-    result = 31 * result + email.hashCode();
-    result = 31 * result + password.hashCode();
+    int result = _id != null ? _id.hashCode() : 0;
+    result = 31 * result + (name != null ? name.hashCode() : 0);
+    result = 31 * result + (surname != null ? surname.hashCode() : 0);
     return result;
   }
 }

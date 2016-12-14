@@ -1,9 +1,12 @@
 package com.teamup.controllers;
 
+import com.teamup.dto.ParticipantDTO;
 import com.teamup.entities.Participant;
 import com.teamup.service.ServiceTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by user01 on 11/28/16.
@@ -21,7 +24,15 @@ public class ParticipantController {
   }
 
   @RequestMapping(value="/{name}", method=RequestMethod.GET)
-  public @ResponseBody Participant getParticipantByName(@PathVariable String name) {
+  public @ResponseBody
+  Participant getParticipantByName(@PathVariable String name) {
     return test.read(name);
+  }
+
+  @CrossOrigin(origins = "http://localhost:3000")
+  @RequestMapping(value="/all", method=RequestMethod.GET)
+  public @ResponseBody
+  List<ParticipantDTO> getAllParticipants() {
+    return test.getAllParticipants();
   }
 }
