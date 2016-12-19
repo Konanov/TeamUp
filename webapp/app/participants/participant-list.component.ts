@@ -17,7 +17,7 @@ import {Participant} from "./participant.component";
 
 export class ParticipantListComponent implements OnInit {
 
-  private avatarUrl = "http://localhost:8080/participants/avatar/";
+  private avatarUrl = "http://ocalhost:8080/participants/avatar/";
 
   participants: Participant[];
 
