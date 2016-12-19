@@ -1,9 +1,9 @@
 package com.teamup.controllers;
 
-import com.amazonaws.util.IOUtils;
 import com.teamup.dto.ParticipantDTO;
 import com.teamup.entities.Participant;
 import com.teamup.service.ServiceTest;
+import org.apache.commons.io.IOUtils;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
