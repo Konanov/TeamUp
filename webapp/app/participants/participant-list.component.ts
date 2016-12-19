@@ -5,18 +5,24 @@ import {Participant} from "./participant.component";
 @Component({
   selector: 'participants-list',
   template: `
-  <div *ngFor="let participant of participants">
-    <span>{{participant.name}}{{participant.surname}}</span>
+  <div>
+  <button *ngFor="let participant of participants" class="btn btn-primary" type="button">
+  <div class="row"><img class="img-circle" style="height: 25px; width: 25px" src="{{avatarUrl}}{{participant.id}}"></div>
+  <div class="row"><div class="label">{{participant.name}} {{participant.surname}}</div></div>
+  </button>
   </div>`,
 
-  providers: [ ParticipantsService ]
+  providers: [ParticipantsService],
 })
 
-export class ParticipantListComponent implements OnInit{
+export class ParticipantListComponent implements OnInit {
+
+  private avatarUrl = "http://localhost:8080/participants/avatar/";
 
   participants: Participant[];
 
-  constructor (private participantsService: ParticipantsService) {}
+  constructor(private participantsService: ParticipantsService) {
+  }
 
   ngOnInit() {
     this.participantsService.getParticipants().subscribe(

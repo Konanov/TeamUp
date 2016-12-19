@@ -1,11 +1,14 @@
 package com.teamup.controllers;
 
+import com.amazonaws.util.IOUtils;
 import com.teamup.dto.ParticipantDTO;
 import com.teamup.entities.Participant;
 import com.teamup.service.ServiceTest;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -13,6 +16,7 @@ import java.util.List;
  */
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/participants/")
 public class ParticipantController {
 
@@ -29,10 +33,15 @@ public class ParticipantController {
     return test.read(name);
   }
 
-  @CrossOrigin(origins = "http://localhost:3000")
   @RequestMapping(value="/all", method=RequestMethod.GET)
   public @ResponseBody
   List<ParticipantDTO> getAllParticipants() {
     return test.getAllParticipants();
+  }
+
+  @RequestMapping(value="/avatar/{userId}")
+  public @ResponseBody
+  byte[] getUserAvatar(@PathVariable String userId) throws IOException {
+    return IOUtils.toByteArray(test.getUserAvatar(test.readById(new ObjectId(userId))).getInputStream());
   }
 }

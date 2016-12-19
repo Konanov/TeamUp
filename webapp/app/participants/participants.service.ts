@@ -1,7 +1,7 @@
 import { Injectable }     from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
-import {Participant} from "./participant.component";
+import { Participant } from "./participant.component";
 
 @Injectable()
 export class ParticipantsService {

@@ -3,6 +3,9 @@ package com.teamup.database;
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
 import com.mongodb.WriteResult;
+import com.mongodb.gridfs.GridFS;
+import com.mongodb.gridfs.GridFSDBFile;
+import com.mongodb.gridfs.GridFSInputFile;
 import com.teamup.entities.Mission;
 import com.teamup.entities.Participant;
 import com.teamup.entities.Task;
@@ -11,6 +14,7 @@ import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.query.Query;
 
+import java.io.*;
 import java.util.List;
 
 /**
@@ -60,6 +64,18 @@ public abstract class AbstractMongo {
 
   public List<Participant> getAllParticipants() {
     return ds.find(Participant.class).asList();
+  }
+
+  public void saveUserAvatar(File file, Participant participant) throws IOException {
+    GridFS gridFS = new GridFS(this.mongo.getDB("teamUp"));
+    GridFSInputFile photo = gridFS.createFile(file);
+    photo.setFilename(participant.get_id().toString() + "_user_avatar");
+    photo.save();
+  }
+
+  public GridFSDBFile getUserAvatar(Participant participant) throws IOException {
+    GridFS gridFS = new GridFS(this.mongo.getDB("teamUp"));
+    return gridFS.findOne(participant.get_id() + "_user_avatar");
   }
 
   /**

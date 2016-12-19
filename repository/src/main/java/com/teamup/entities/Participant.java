@@ -1,5 +1,6 @@
 package com.teamup.entities;
 
+import com.mongodb.gridfs.GridFSDBFile;
 import com.teamup.security.User;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
@@ -24,7 +25,7 @@ public class Participant extends User implements Serializable {
   private Task currentTask;
   @Embedded
   private List<Task> tasks = new ArrayList<>();
-  private byte[] avatar;
+  private GridFSDBFile avatar;
   private String coordinates;
 
   protected Participant() {
@@ -67,14 +68,6 @@ public class Participant extends User implements Serializable {
     this.name = name;
   }
 
-  public byte[] getAvatar() {
-    return avatar;
-  }
-
-  public void setAvatar(byte[] avatar) {
-    this.avatar = avatar;
-  }
-
   public String getCoordinates() {
     return coordinates;
   }
@@ -85,6 +78,14 @@ public class Participant extends User implements Serializable {
 
   public ObjectId get_id() {
     return _id;
+  }
+
+  public GridFSDBFile getAvatar() {
+    return avatar;
+  }
+
+  public void setAvatar(GridFSDBFile avatar) {
+    this.avatar = avatar;
   }
 
   @Override

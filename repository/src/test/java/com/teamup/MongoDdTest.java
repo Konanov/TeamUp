@@ -1,16 +1,26 @@
 package com.teamup;
 
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Region;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.s3.AmazonS3Client;
 import com.teamup.database.MongoTest;
 import com.teamup.entities.Participant;
 import com.teamup.entities.Task;
 import com.teamup.service.ServiceTest;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by user01 on 11/29/16.
@@ -27,6 +37,7 @@ public class MongoDdTest {
 
   private Participant participant1;
   private Participant participant2;
+  private AmazonS3Client amazonS3Client;
 
   @Before
   public void prepareDB() {
@@ -34,6 +45,9 @@ public class MongoDdTest {
     participant2 = serviceTest.create("Костя", "Сидоров", "kostya@gmail.com", "kostya121");
     serviceTest.save(participant1);
     serviceTest.save(participant2);
+
+    amazonS3Client = new AmazonS3Client(new BasicAWSCredentials("AKIAIDZ2A3ZRNGYMFXBQ", "+uAqjWTDHqb1iNv8Mu8gCJ2BwAK29jqYarPK0KNW"));
+    amazonS3Client.setRegion(Region.getRegion(Regions.EU_WEST_1));
   }
 
   @Test
@@ -65,7 +79,13 @@ public class MongoDdTest {
     Assert.assertEquals(2, serviceTest.getAllParticipants().size());
   }
 
-  /*@After
+  @Test
+  public void saveUserAvatar() throws IOException {
+    serviceTest.saveUserAvatar(new File("/home/user01/Projects/mapApp/map-app/repository/src/test/resources/avatar-placeholder.png"), participant1);
+    serviceTest.saveUserAvatar(new File("/home/user01/Projects/mapApp/map-app/repository/src/test/resources/avatar-placeholder.png"), participant2);
+  }
+
+    /*@After
   public void destroyDB() {
     serviceTest.dropDatabase("teamUp");
   }*/

@@ -6,10 +6,6 @@ import org.mongodb.morphia.annotations.Id;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
-/**
- * Created by user01 on 12/1/16.
- */
-
 @Entity("missions")
 public class Mission {
 
