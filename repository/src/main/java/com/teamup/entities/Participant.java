@@ -21,10 +21,10 @@ public class Participant extends User implements Serializable {
   private ObjectId _id;
   private String name;
   private String surname;
-  @Transient
   private Task currentTask;
   @Embedded
   private List<Task> tasks = new ArrayList<>();
+  @Transient
   private GridFSDBFile avatar;
   private String coordinates;
 

@@ -1,9 +1,5 @@
 package com.teamup;
 
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.regions.Region;
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.s3.AmazonS3Client;
 import com.teamup.database.MongoTest;
 import com.teamup.entities.Participant;
 import com.teamup.entities.Task;
@@ -37,17 +33,15 @@ public class MongoDdTest {
 
   private Participant participant1;
   private Participant participant2;
-  private AmazonS3Client amazonS3Client;
 
   @Before
   public void prepareDB() {
     participant1 = serviceTest.create("Вася", "Петечкин", "vasya@gmail.com", "vasya121");
     participant2 = serviceTest.create("Костя", "Сидоров", "kostya@gmail.com", "kostya121");
+    Task task = new Task("Купить цветы на оптовой базе", participant1.get_id(), participant2.get_id(), "35.987234, 55.123498");
+    participant2.setCurrentTask(task);
     serviceTest.save(participant1);
     serviceTest.save(participant2);
-
-    amazonS3Client = new AmazonS3Client(new BasicAWSCredentials("AKIAIDZ2A3ZRNGYMFXBQ", "+uAqjWTDHqb1iNv8Mu8gCJ2BwAK29jqYarPK0KNW"));
-    amazonS3Client.setRegion(Region.getRegion(Regions.EU_WEST_1));
   }
 
   @Test
@@ -81,8 +75,12 @@ public class MongoDdTest {
 
   @Test
   public void saveUserAvatar() throws IOException {
+    Participant manager = serviceTest.read("Вася");
+    Participant executor = serviceTest.read("Костя");
+    serviceTest.assignTask("Купить цветы на оптовой базе", manager.get_id(), executor.get_id(), "35.987234, 55.123498");
+    Participant executorReRead = serviceTest.read("Костя");
     serviceTest.saveUserAvatar(new File("/home/user01/Projects/mapApp/map-app/repository/src/test/resources/avatar-placeholder.png"), participant1);
-    serviceTest.saveUserAvatar(new File("/home/user01/Projects/mapApp/map-app/repository/src/test/resources/avatar-placeholder.png"), participant2);
+    serviceTest.saveUserAvatar(new File("/home/user01/Projects/mapApp/map-app/repository/src/test/resources/logo-large.png"), participant2);
   }
 
     /*@After

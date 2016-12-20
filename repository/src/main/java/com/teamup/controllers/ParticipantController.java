@@ -28,20 +28,17 @@ public class ParticipantController {
   }
 
   @RequestMapping(value="/{name}", method=RequestMethod.GET)
-  public @ResponseBody
-  Participant getParticipantByName(@PathVariable String name) {
+  public Participant getParticipantByName(@PathVariable String name) {
     return test.read(name);
   }
 
   @RequestMapping(value="/all", method=RequestMethod.GET)
-  public @ResponseBody
-  List<ParticipantDTO> getAllParticipants() {
+  public List<ParticipantDTO> getAllParticipants() {
     return test.getAllParticipants();
   }
 
   @RequestMapping(value="/avatar/{userId}")
-  public @ResponseBody
-  byte[] getUserAvatar(@PathVariable String userId) throws IOException {
+  public byte[] getUserAvatar(@PathVariable String userId) throws IOException {
     return IOUtils.toByteArray(test.getUserAvatar(test.readById(new ObjectId(userId))).getInputStream());
   }
 }
