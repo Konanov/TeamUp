@@ -44,6 +44,21 @@
         height: calc(100vh - 95%);
         background-color: transparent;
       }
+
+      .modal-backdrop {
+        background-color: transparent;
+      }
+
+      .modal.fade .modal-dialog {
+        -webkit-transform: translate(0, -25%);
+        -ms-transform: translate(0, -25%);
+        transform: translate(0, -25%);
+        -webkit-transition: -webkit-transform 0.3s ease-out;
+        -moz-transition: -moz-transform 0.3s ease-out;
+        -o-transition: -o-transform 0.3s ease-out;
+        transition: transform 0.3s ease-out;
+        margin-top: 30%;
+      }
     </style>
     <script src="/systemjs.config.js"></script>
     <script>
