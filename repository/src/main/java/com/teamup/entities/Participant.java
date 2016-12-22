@@ -1,7 +1,6 @@
 package com.teamup.entities;
 
 import com.mongodb.gridfs.GridFSDBFile;
-import com.teamup.security.User;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
@@ -15,7 +14,7 @@ import java.util.List;
 
 @Entity("participants")
 @Repository
-public class Participant extends User implements Serializable {
+public class Participant implements Serializable {
 
   @Id
   private ObjectId _id;

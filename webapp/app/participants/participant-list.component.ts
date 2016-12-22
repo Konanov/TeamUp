@@ -9,7 +9,7 @@ import {Observable} from "rxjs";
   selector: 'participants-list',
   template: `
   <div>
-  <button *ngFor="let participant of participants" class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal" (click)="onSelect(participant)">
+  <button *ngFor="let participant of participants" class="btn btn-primary" type="button" data-toggle="modal" data-target="#participantModal" (click)="onSelect(participant)">
   <div class="row"><img class="img-circle" style="height: 25px; width: 25px" src="{{avatarUrl}}{{participant.id}}"></div>
   <div class="row"><div class="label">{{participant.name}} {{participant.surname}}</div></div>
   </button>
@@ -27,7 +27,7 @@ export class ParticipantListComponent implements OnInit {
   ) {}
 
   onSelect(participant: Participant) {
-    this.router.navigate(['/participantInfo', participant.id]);
+    this.router.navigate(['/content', { outlets: { main: 'participantInfo/' + participant.id } }]);
   }
 
   private avatarUrl = "http://localhost:8080/participants/avatar/";

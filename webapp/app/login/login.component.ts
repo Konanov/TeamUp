@@ -3,13 +3,10 @@ import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'login-page',
-  template: `<form [formGroup]="loginForm" (ngSubmit)="doLogin($event)">
-<input formControlName="email" type="email" placeholder="Your email">
-<input formContControl="password" type="password" placeholder="Your password">
-<button type="submit">Log in</button>
-</form>`
+  templateUrl: 'login.html'
 })
 export class LoginPage {
+
   public loginForm = this.fb.group({
     email: ["", Validators.required],
     password: ["", Validators.required]

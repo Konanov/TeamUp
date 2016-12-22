@@ -3,6 +3,7 @@ package com.teamup.database;
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
 import com.mongodb.WriteResult;
+import com.mongodb.client.MongoDatabase;
 import com.mongodb.gridfs.GridFS;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSInputFile;
@@ -36,8 +37,12 @@ public abstract class AbstractMongo {
     this.morphia.map(Participant.class);
   }
 
+  public MongoDatabase getDatabase(String name) {
+    return this.mongo.getDatabase(name);
+  }
+
   /**
-   * Participant
+   * MongoUserDetails
    */
 
   public void save(Participant participant) {

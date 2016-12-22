@@ -10,12 +10,13 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { HttpModule, JsonpModule } from '@angular/http';
 import {AppRoutingModule} from "./app.routing.module";
 import {ParticipantsModule} from "./participants/participant.module";
+import {MainView} from "./main.view.component";
 
 
 @NgModule({
   imports:      [ BrowserModule, ReactiveFormsModule, HttpModule, JsonpModule, AppRoutingModule, ParticipantsModule],
   declarations: [ AppComponent, Header, MapComponent,
-    Footer, LoginPage ],
+    Footer, LoginPage, MainView ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

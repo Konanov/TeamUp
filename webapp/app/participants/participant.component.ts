@@ -6,7 +6,7 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'participant-details',
   template: `
-<div id="myModal" class="modal fade" role="dialog">
+<div id="participantModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <div class="modal-content" *ngIf="participant">

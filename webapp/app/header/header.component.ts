@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {Validators, FormBuilder} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -17,7 +17,7 @@ import {Validators, FormBuilder} from "@angular/forms";
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+            <div class="btn btn-primary navbar-btn" (click)="onClick()">Авторизация</div>
             <li><a href="#">Link</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -49,4 +49,10 @@ import {Validators, FormBuilder} from "@angular/forms";
       </div><!-- /.container-fluid -->
     </nav>`
 })
-export class Header {}
+export class Header {
+  constructor(private router: Router) {}
+
+  onClick() {
+    this.router.navigate(['/login']);
+  }
+}

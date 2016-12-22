@@ -32,7 +32,7 @@ public abstract class AbstractService {
    */
 
   /**
-   * Participant
+   * MongoUserDetails
    */
 
   public void save(Participant participant) {

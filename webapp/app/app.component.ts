@@ -1,14 +1,12 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 import './rxjs-operators';
 
 @Component({
   selector: 'main-app',
-  template: `
-<app-header></app-header>
-<login-page></login-page>
-<router-outlet></router-outlet>
-    <my-map></my-map>
-    <app-footer></app-footer>`
+  template: `<router-outlet></router-outlet>`
 })
-export class AppComponent  { name = 'Angular'; }
+
+export class AppComponent {
+  name = 'Angular';
+}
