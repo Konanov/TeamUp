@@ -5,11 +5,12 @@ import {AppComponent} from "./app.component";
 import {LoginPage} from "./login/login.component";
 import {MainView} from "./main.view.component";
 import {Participant} from "./participants/participant.component";
+import {AuthGuard} from "./login/auth.guard.service";
 
 const teamUpRoutes: Routes = [
   { path: '', component: AppComponent },
   { path: 'login', component: LoginPage},
-  { path: 'index', component: MainView},
+  { path: 'index', component: MainView, canActivate: [AuthGuard] },
 
   {
     path: 'content',

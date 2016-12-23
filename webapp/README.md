@@ -89,14 +89,14 @@ We've captured many of the most useful commands in npm scripts defined in the `p
 [Christopher Martin](https://github.com/cgmartin)
 with excellent support for Angular apps that use routing.
 
-Here are the test related scripts:
-* `npm test` - compiles, runs and watches the karma unit tests
+Here are the accountRepository related scripts:
+* `npm accountRepository` - compiles, runs and watches the karma unit tests
 * `npm run e2e` - run protractor e2e tests, written in JavaScript (*e2e-spec.js)
 
 ## Testing
 
 The QuickStart documentation doesn't discuss testing.
-This repo adds both karma/jasmine unit test and protractor end-to-end testing support.
+This repo adds both karma/jasmine unit accountRepository and protractor end-to-end testing support.
 
 These tools are configured for specific conventions described below.
 
@@ -109,9 +109,9 @@ TypeScript unit-tests are usually in the `app` folder. Their filenames must end 
 Look for the example `app/app.component.spec.ts`.
 Add more `.spec.ts` files as you wish; we configured karma to find them.
 
-Run it with `npm test`
+Run it with `npm accountRepository`
 
-That command first compiles the com.teamup.application, then simultaneously re-compiles and runs the karma test-runner.
+That command first compiles the com.teamup.application, then simultaneously re-compiles and runs the karma accountRepository-runner.
 Both the compiler and the karma watch for (different) file changes.
 
 Shut it down manually with `Ctrl-C`.
@@ -135,7 +135,7 @@ Thereafter, run them with `npm run e2e`.
 That command first compiles, then simultaneously starts the Http-Server at `localhost:8080`
 and launches protractor.  
 
-The pass/fail test results appear at the bottom of the terminal window.
+The pass/fail accountRepository results appear at the bottom of the terminal window.
 A custom reporter (see `protractor.config.js`) generates a  `./_test-output/protractor-results.txt` file
 which is easier to read; this file is excluded from source control.
 

@@ -32,11 +32,12 @@ public abstract class AbstractService {
    */
 
   /**
-   * MongoUserDetails
+   * Participants
    */
 
-  public void save(Participant participant) {
+  public Participant save(Participant participant) {
     this.db.save(participant);
+    return this.db.read(participant.getName());
   }
 
   public Participant create(String name, String surname, String email, String password) {
@@ -45,6 +46,10 @@ public abstract class AbstractService {
 
   public Participant read(String name) {
     return db.read(name);
+  }
+
+  public Participant read(String email, String password) {
+    return db.read(email, password);
   }
 
   public Participant readById(ObjectId id) {

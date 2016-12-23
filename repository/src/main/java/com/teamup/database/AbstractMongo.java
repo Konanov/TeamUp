@@ -42,15 +42,20 @@ public abstract class AbstractMongo {
   }
 
   /**
-   * MongoUserDetails
+   * Participants
    */
 
-  public void save(Participant participant) {
+  public Participant save(Participant participant) {
     this.ds.save(participant);
+    return this.read(participant.getName());
   }
 
   public Participant read(String name) {
     return ds.find(Participant.class).field("name").equal(name).get();
+  }
+
+  public Participant read(String email, String password) {
+    return ds.find(Participant.class).field("email").equal(email).field("password").equal(password).get();
   }
 
   public Participant readById(ObjectId id) {

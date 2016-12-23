@@ -1,4 +1,4 @@
-package com.teamup.security;
+/*package com.teamup.security;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -14,10 +14,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-/**
- * Created by user01 on 12/22/16.
- */
 
 @Service
 public class MongoUserDetailsService implements UserDetailsService {
@@ -46,4 +42,4 @@ public class MongoUserDetailsService implements UserDetailsService {
     }
     return null;
   }
-}
+}*/

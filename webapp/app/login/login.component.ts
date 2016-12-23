@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {Http} from "@angular/http";
+import {Router} from "@angular/router";
+import {contentHeaders} from "./content.headers";
 
 @Component({
   selector: 'login-page',
@@ -7,16 +9,27 @@ import {FormBuilder, Validators} from '@angular/forms';
 })
 export class LoginPage {
 
-  public loginForm = this.fb.group({
-    email: ["", Validators.required],
-    password: ["", Validators.required]
-  });
-
-  constructor(public fb: FormBuilder) {
+  constructor(public router: Router, public http: Http) {
   }
 
-  doLogin(event) {
-    console.log(event);
-    console.log(this.loginForm.value);
+  login(event, email, password) {
+    event.preventDefault();
+    let body = JSON.stringify({ email, password });
+    this.http.post('http://localhost:8080/login', body, { headers: contentHeaders })
+      .subscribe(
+        response => {
+          localStorage.setItem('id_token', response.json().id_token);
+          this.router.navigate(['index']);
+        },
+        error => {
+          alert(error.text());
+          console.log(error.text());
+        }
+      );
+  }
+
+  signup(event) {
+    event.preventDefault();
+    this.router.navigate(['signup']);
   }
 }

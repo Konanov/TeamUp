@@ -1,4 +1,4 @@
-package com.teamup.security;
+/*package com.teamup.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -6,9 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by user01 on 12/13/16.
- */
+
 
 public class MongoUserDetails implements UserDetails {
   private String userName;
@@ -55,4 +53,4 @@ public class MongoUserDetails implements UserDetails {
   public boolean isEnabled() {
     return false;
   }
-}
+}*/

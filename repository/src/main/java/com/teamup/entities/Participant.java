@@ -20,6 +20,8 @@ public class Participant implements Serializable {
   private ObjectId _id;
   private String name;
   private String surname;
+  private String email;
+  private String password;
   private Task currentTask;
   @Embedded
   private List<Task> tasks = new ArrayList<>();
@@ -33,6 +35,29 @@ public class Participant implements Serializable {
   public Participant(String name, String surname, String email, String password) {
     this.name = name;
     this.surname = surname;
+    this.email = email;
+    this.password = password;
+  }
+
+  public Participant(String email, String password) {
+    this.email = email;
+    this.password = password;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 
   public String getSurname() {
