@@ -18,8 +18,13 @@ export class LoginPage {
     this.http.post('http://localhost:8080/login', body, { headers: contentHeaders })
       .subscribe(
         response => {
-          localStorage.setItem('id_token', response.json().id_token);
-          this.router.navigate(['index']);
+          if (response.json().email != null && response.json().password != null) {
+            localStorage.setItem('email', response.json().email);
+            localStorage.setItem('password', response.json().password);
+            this.router.navigate(['index']);
+          } else {
+            alert("Такого пользователя не существует");
+          }
         },
         error => {
           alert(error.text());

@@ -64,6 +64,10 @@ public abstract class AbstractService {
     return new ParticipantDTO(participant.get_id().toHexString(), participant.getName(), participant.getSurname());
   }
 
+  public ParticipantDTO convertParticipant(String email, String password) {
+    return new ParticipantDTO(email, password);
+  }
+
   public List<ParticipantDTO> getAllParticipants() {
     return db.getAllParticipants().stream().map(this::convertParticipant).collect(Collectors.toList());
   }
