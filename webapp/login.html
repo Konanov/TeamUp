@@ -1,15 +1,39 @@
 <div class="login jumbotron center-block">
-  <h1>Login</h1>
-  <form role="form" (submit)="login($event, username.value, password.value)">
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" #username class="form-control" id="username" placeholder="Email">
+  <form role="form">
+    <div *ngIf="showLogin" id="loginView">
+      <h1>Войти</h1>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" #username class="form-control" id="username" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <label for="password1">Password</label>
+        <input type="password" #password class="form-control" id="password1" placeholder="Password">
+      </div>
+      <button type="submit" (click)="login($event, username.value, password.value)" class="btn btn-default">Submit</button>
+      <a [routerLink]="['/signup']">Click here to Signup</a>
     </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" #password class="form-control" id="password" placeholder="Password">
+    <div *ngIf="showRegister" id="registerView">
+      <h1>Регистрация</h1>
+      <h2 *ngIf="userIsRegistered">Этот пользователь уже зарегестрированю Восстановить пароль?</h2>
+      <div class="form-group">
+        <label for="name">Имя</label>
+        <input type="text" #name class="form-control" id="name" placeholder="Имя">
+      </div>
+      <div class="form-group">
+        <label for="surname">Фамилия</label>
+        <input type="text" #surname class="form-control" id="surname" placeholder="Фамилия">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" #email class="form-control" id="email" placeholder="Email">
+      </div>
+      <div class="form-group">
+        <label for="password2">Password</label>
+        <input type="password" #password class="form-control" id="password2" placeholder="Password">
+      </div>
+      <button type="submit" (click)="register($event, name.value, surname.value, email.value, password.value)" class="btn btn-default">Submit</button>
+      <a [routerLink]="['/signup']">Click here to Signup</a>
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-    <a [routerLink]="['/signup']">Click here to Signup</a>
   </form>
 </div>

@@ -12,6 +12,12 @@ export class LoginPage {
   constructor(public router: Router, public http: Http) {
   }
 
+  showLogin: boolean = true;
+
+  showRegister: boolean = false;
+
+  userIsRegistered: boolean = false;
+
   login(event, email, password) {
     event.preventDefault();
     let body = JSON.stringify({ email, password });
@@ -23,7 +29,29 @@ export class LoginPage {
             localStorage.setItem('password', response.json().password);
             this.router.navigate(['index']);
           } else {
-            alert("Такого пользователя не существует");
+            this.showLogin = false;
+            this.showRegister = true;
+          }
+        },
+        error => {
+          alert(error.text());
+          console.log(error.text());
+        }
+      );
+  }
+
+  register(event, name, surname, email, password) {
+    event.preventDefault();
+    let body = JSON.stringify({ name, surname, email, password });
+    this.http.post('http://localhost:8080/register', body, { headers: contentHeaders })
+      .subscribe(
+        response => {
+          if (response.json().email != null && response.json().password != null) {
+            localStorage.setItem('email', response.json().email);
+            localStorage.setItem('password', response.json().password);
+            this.router.navigate(['index']);
+          } else {
+            this.userIsRegistered = true;
           }
         },
         error => {

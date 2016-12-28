@@ -44,8 +44,8 @@ public abstract class AbstractService {
     return new Participant(name, surname, email, password);
   }
 
-  public Participant read(String name) {
-    return db.read(name);
+  public Participant read(String email) {
+    return db.read(email);
   }
 
   public Participant read(String email, String password) {

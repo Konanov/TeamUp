@@ -50,8 +50,8 @@ public abstract class AbstractMongo {
     return this.read(participant.getName());
   }
 
-  public Participant read(String name) {
-    return ds.find(Participant.class).field("name").equal(name).get();
+  public Participant read(String email) {
+    return ds.find(Participant.class).field("email").equal(email).get();
   }
 
   public Participant read(String email, String password) {

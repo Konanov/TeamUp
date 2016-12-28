@@ -14,13 +14,13 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:3000")
 public class LoginController {
 
-  private ServiceTest accountRepository;
+  private ServiceTest accountService;
 
   private Map<String, String> loggedInUsers = new HashMap<>();
 
   @Autowired
   public LoginController(ServiceTest accountRepository) {
-    this.accountRepository = accountRepository;
+    this.accountService = accountRepository;
   }
 
   @RequestMapping(value = "login", method = RequestMethod.POST)
@@ -28,12 +28,23 @@ public class LoginController {
     if (loggedInUsers.containsKey(participant.getEmail())) {
       return participant;
     } else {
-      Participant fullParticipant = this.accountRepository.read(participant.getEmail(), participant.getPassword());
+      Participant fullParticipant = this.accountService.read(participant.getEmail(), participant.getPassword());
       if (fullParticipant != null) {
         loggedInUsers.put(fullParticipant.getEmail(), fullParticipant.getPassword());
-        return accountRepository.convertParticipant(fullParticipant.getEmail(), fullParticipant.getPassword());
+        return accountService.convertParticipant(fullParticipant.getEmail(), fullParticipant.getPassword());
       }
       return new ParticipantDTO(null, null);
+    }
+  }
+
+  @RequestMapping(value = "register", method = RequestMethod.POST)
+  public ParticipantDTO register(@RequestBody ParticipantDTO participant) {
+    Participant fullParticipant = this.accountService.read(participant.getEmail());
+    if (fullParticipant != null) {
+      return new ParticipantDTO(null, null);
+    } else {
+      accountService.save(new Participant(participant.getName(), participant.getSurname(), participant.getEmail(), participant.getPassword()));
+      return accountService.convertParticipant(participant.getEmail(), participant.getPassword());
     }
   }
 }
