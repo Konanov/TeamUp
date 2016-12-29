@@ -6,7 +6,6 @@ import com.teamup.service.ServiceTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,27 +23,27 @@ public class LoginController {
   }
 
   @RequestMapping(value = "login", method = RequestMethod.POST)
-  public ParticipantDTO login(@RequestBody ParticipantDTO participant) throws UnsupportedEncodingException {
+  public Participant login(@RequestBody Participant participant) {
     if (loggedInUsers.containsKey(participant.getEmail())) {
       return participant;
     } else {
       Participant fullParticipant = this.accountService.read(participant.getEmail(), participant.getPassword());
       if (fullParticipant != null) {
         loggedInUsers.put(fullParticipant.getEmail(), fullParticipant.getPassword());
-        return accountService.convertParticipant(fullParticipant.getEmail(), fullParticipant.getPassword());
+        return fullParticipant;
       }
-      return new ParticipantDTO(null, null);
+      return new Participant(null, null, null, null);
     }
   }
 
   @RequestMapping(value = "register", method = RequestMethod.POST)
-  public ParticipantDTO register(@RequestBody ParticipantDTO participant) {
+  public Participant register(@RequestBody ParticipantDTO participant) {
     Participant fullParticipant = this.accountService.read(participant.getEmail());
     if (fullParticipant != null) {
-      return new ParticipantDTO(null, null);
+      return new Participant(null, null, null, null);
     } else {
       accountService.save(new Participant(participant.getName(), participant.getSurname(), participant.getEmail(), participant.getPassword()));
-      return accountService.convertParticipant(participant.getEmail(), participant.getPassword());
+      return fullParticipant;
     }
   }
 }

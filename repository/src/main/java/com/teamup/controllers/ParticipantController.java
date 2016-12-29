@@ -1,6 +1,5 @@
 package com.teamup.controllers;
 
-import com.teamup.dto.ParticipantDTO;
 import com.teamup.entities.Participant;
 import com.teamup.service.ServiceTest;
 import org.apache.commons.io.IOUtils;
@@ -33,12 +32,17 @@ public class ParticipantController {
   }
 
   @RequestMapping(value="/all", method=RequestMethod.GET)
-  public List<ParticipantDTO> getAllParticipants() {
+  public List<Participant> getAllParticipants() {
     return test.getAllParticipants();
   }
 
   @RequestMapping(value="/avatar/{userId}")
   public byte[] getUserAvatar(@PathVariable String userId) throws IOException {
     return IOUtils.toByteArray(test.getUserAvatar(test.readById(new ObjectId(userId))).getInputStream());
+  }
+
+  @RequestMapping(value="/byMission/{mission_id}", method=RequestMethod.GET)
+  public List<Participant> getAllParticipants(@PathVariable String mission_id) {
+    return test.getCurrentParty(mission_id);
   }
 }

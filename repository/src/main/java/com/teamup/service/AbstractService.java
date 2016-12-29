@@ -2,7 +2,6 @@ package com.teamup.service;
 
 import com.mongodb.gridfs.GridFSDBFile;
 import com.teamup.database.AbstractMongo;
-import com.teamup.dto.ParticipantDTO;
 import com.teamup.entities.Mission;
 import com.teamup.entities.Participant;
 import com.teamup.entities.Task;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by user01 on 11/30/16.
@@ -44,6 +42,10 @@ public abstract class AbstractService {
     return new Participant(name, surname, email, password);
   }
 
+  public boolean update(String field, String value, String email) {
+    return this.db.update(field, value, email) != null;
+  }
+
   public Participant read(String email) {
     return db.read(email);
   }
@@ -60,16 +62,8 @@ public abstract class AbstractService {
     db.delete(participantName);
   }
 
-  public ParticipantDTO convertParticipant(Participant participant) {
-    return new ParticipantDTO(participant.get_id().toHexString(), participant.getName(), participant.getSurname());
-  }
-
-  public ParticipantDTO convertParticipant(String email, String password) {
-    return new ParticipantDTO(email, password);
-  }
-
-  public List<ParticipantDTO> getAllParticipants() {
-    return db.getAllParticipants().stream().map(this::convertParticipant).collect(Collectors.toList());
+  public List<Participant> getAllParticipants() {
+    return db.getAllParticipants();
   }
 
   public void saveUserAvatar(File file, Participant participant) throws IOException {
@@ -108,8 +102,20 @@ public abstract class AbstractService {
     this.db.save(mission);
   }
 
+  public Mission read(Mission mission) {
+    return this.db.read(mission);
+  }
 
   public void dropDatabase(String name) {
     db.dropDatabase(name);
+  }
+
+  public void addParticipant(Participant participant, Mission mission) {
+    mission.getParticipants().add(participant);
+    db.save(mission);
+  }
+
+  public List<Participant> getCurrentParty(String mission_id) {
+    return db.getCurrentParty(mission_id);
   }
 }

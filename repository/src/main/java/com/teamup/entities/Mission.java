@@ -4,14 +4,14 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
-import java.util.concurrent.ArrayBlockingQueue;
+import java.util.ArrayList;
 
 @Entity("missions")
 public class Mission {
 
   @Id
   private ObjectId _id;
-  private ArrayBlockingQueue<Participant> participants = new ArrayBlockingQueue<>(5);
+  private ArrayList<Participant> participants = new ArrayList<>();
   private Participant manager;
   private String description;
 
@@ -31,11 +31,11 @@ public class Mission {
     this._id = _id;
   }
 
-  public ArrayBlockingQueue<Participant> getParticipants() {
+  public ArrayList<Participant> getParticipants() {
     return participants;
   }
 
-  public void setParticipants(ArrayBlockingQueue<Participant> participants) {
+  public void setParticipants(ArrayList<Participant> participants) {
     this.participants = participants;
   }
 
@@ -59,13 +59,10 @@ public class Mission {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-
     Mission mission = (Mission) o;
-
     if (!participants.equals(mission.participants)) return false;
     if (!manager.equals(mission.manager)) return false;
     return description.equals(mission.description);
-
   }
 
   @Override

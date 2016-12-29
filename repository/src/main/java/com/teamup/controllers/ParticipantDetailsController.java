@@ -26,4 +26,9 @@ public class ParticipantDetailsController {
   public Participant getParticipantInfo(@RequestParam String id) {
     return service.readById(new ObjectId(id));
   }
+
+  @RequestMapping(value = "/byEmail/{email}")
+  public Participant getParticipantByEmail(@PathVariable String email) {
+    return service.read(email);
+  }
 }

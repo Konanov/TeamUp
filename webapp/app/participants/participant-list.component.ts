@@ -14,7 +14,6 @@ import {Observable} from "rxjs";
   <div class="row"><div class="label">{{participant.name}} {{participant.surname}}</div></div>
   </button>
 </div>`,
-
   providers: [ParticipantsService]
 })
 
@@ -32,11 +31,13 @@ export class ParticipantListComponent implements OnInit {
 
   private avatarUrl = "http://localhost:8080/participants/avatar/";
 
+  manager: Observable<Participant>;
+
   participants: Observable<Participant[]>;
 
   ngOnInit() {
-    this.service.getParticipants().subscribe(
-    participants => this.participants = participants,
-    error => this.errorMessage = <any>error);
+      this.service.getCurrentParty().subscribe(
+        participants => this.participants = participants,
+        error => this.errorMessage = <any>error)
   }
 }

@@ -27,6 +27,9 @@ export class LoginPage {
           if (response.json().email != null && response.json().password != null) {
             localStorage.setItem('email', response.json().email);
             localStorage.setItem('password', response.json().password);
+            if (response.json().currentMissionId != null) {
+              localStorage.setItem('currentMissionId', response.json().currentMissionId);
+            }
             this.router.navigate(['index']);
           } else {
             this.showLogin = false;
@@ -64,5 +67,15 @@ export class LoginPage {
   signup(event) {
     event.preventDefault();
     this.router.navigate(['signup']);
+  }
+
+  showRegistration() {
+    this.showRegister = true;
+    this.showLogin = false;
+  }
+
+  showLoginPage() {
+    this.showLogin = true;
+    this.showRegister = false;
   }
 }

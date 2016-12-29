@@ -9,19 +9,15 @@ public class ParticipantDTO {
   private String surname;
   private String email;
   private String password;
+  private String currentMissionId;
 
   public ParticipantDTO() {
   }
 
-  public ParticipantDTO(String id, String name, String surname) {
-    this.id = id;
-    this.name = name;
-    this.surname = surname;
-  }
-
-  public ParticipantDTO(String email, String password) {
+  public ParticipantDTO(String email, String password, String currentMissionId) {
     this.email = email;
     this.password = password;
+    this.currentMissionId = currentMissionId;
   }
 
   public String getEmail() {
@@ -62,5 +58,13 @@ public class ParticipantDTO {
 
   public void setSurname(String surname) {
     this.surname = surname;
+  }
+
+  public String getCurrentMissionId() {
+    return currentMissionId;
+  }
+
+  public void setCurrentMissionId(String currentMissionId) {
+    this.currentMissionId = currentMissionId;
   }
 }

@@ -1,8 +1,6 @@
 package com.teamup.database;
 
-import com.mongodb.MongoClient;
-import com.mongodb.ServerAddress;
-import com.mongodb.WriteResult;
+import com.mongodb.*;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.gridfs.GridFS;
 import com.mongodb.gridfs.GridFSDBFile;
@@ -15,7 +13,8 @@ import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.query.Query;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -58,6 +57,14 @@ public abstract class AbstractMongo {
     return ds.find(Participant.class).field("email").equal(email).field("password").equal(password).get();
   }
 
+  public WriteResult update(String field, String value, String email) {
+    DBCollection collection = this.mongo.getDB("teamUp").getCollection("participants");
+    BasicDBObject newDocument = new BasicDBObject();
+    newDocument.append("$set", new BasicDBObject().append(field, value));
+    BasicDBObject searchQuery = new BasicDBObject().append("email", email);
+    return collection.update(searchQuery, newDocument);
+  }
+
   public Participant readById(ObjectId id) {
     return ds.find(Participant.class).field("_id").equal(id).get();
   }
@@ -97,11 +104,6 @@ public abstract class AbstractMongo {
     this.ds.save(task);
   }
 
-  public void save(Mission mission) {
-    this.morphia.map(Mission.class);
-    this.ds.save(mission);
-  }
-
   public void dropDatabase(String name) {
     mongo.dropDatabase(name);
   }
@@ -110,5 +112,22 @@ public abstract class AbstractMongo {
     Query<Task> query = ds.createQuery(Task.class);
     query.field("_id").equal(taskId);
     return ds.delete(query);
+  }
+
+  /**
+   * Mission
+   */
+
+  public void save(Mission mission) {
+    this.morphia.map(Mission.class);
+    this.ds.save(mission);
+  }
+
+  public Mission read(Mission mission) {
+    return ds.find(Mission.class).field("_id").equal(mission.get_id()).get();
+  }
+
+  public List<Participant> getCurrentParty(String mission_id) {
+    return this.ds.find(Mission.class).field("_id").equal(new ObjectId(mission_id)).get().getParticipants();
   }
 }
