@@ -46,7 +46,7 @@ public abstract class AbstractMongo {
 
   public Participant save(Participant participant) {
     this.ds.save(participant);
-    return this.read(participant.getName());
+    return this.read(participant.getEmail());
   }
 
   public Participant read(String email) {

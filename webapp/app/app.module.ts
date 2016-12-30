@@ -13,10 +13,11 @@ import {AppRoutingModule} from "./app.routing.module";
 import {ParticipantsModule} from "./participants/participant.module";
 import {MainView} from "./main.view.component";
 import {AuthGuard} from "./login/auth.guard.service";
+import {MissionModule} from "./mission/mission.module";
 
 
 @NgModule({
-  imports:      [ BrowserModule, ReactiveFormsModule, FormsModule, HttpModule, JsonpModule, AppRoutingModule, ParticipantsModule],
+  imports:      [ BrowserModule, ReactiveFormsModule, FormsModule, HttpModule, JsonpModule, AppRoutingModule, ParticipantsModule, MissionModule],
   declarations: [ AppComponent, Header, MapComponent,
     Footer, LoginPage, MainView ],
   bootstrap:    [ AppComponent ],

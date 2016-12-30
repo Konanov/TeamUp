@@ -19,6 +19,7 @@ public class Participant implements Serializable {
 
   @Id
   private ObjectId _id;
+  private String id;
   private String name;
   private String surname;
   private String email;
@@ -131,6 +132,14 @@ public class Participant implements Serializable {
 
   public void setCurrentMissionId(String currentMissionId) {
     this.currentMissionId = currentMissionId;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 
   @Override

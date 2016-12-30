@@ -31,8 +31,6 @@ export class ParticipantListComponent implements OnInit {
 
   private avatarUrl = "http://localhost:8080/participants/avatar/";
 
-  manager: Observable<Participant>;
-
   participants: Observable<Participant[]>;
 
   ngOnInit() {

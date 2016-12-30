@@ -6,6 +6,8 @@ import {LoginPage} from "./login/login.component";
 import {MainView} from "./main.view.component";
 import {Participant} from "./participants/participant.component";
 import {AuthGuard} from "./login/auth.guard.service";
+import {Mission} from "./mission/mission.component";
+import {MissionListComponent} from "./mission/mission.list.component";
 
 const teamUpRoutes: Routes = [
   { path: '', component: AppComponent },
@@ -19,6 +21,14 @@ const teamUpRoutes: Routes = [
       {
         path: 'participantInfo/:id',
         component: Participant,
+        outlet: 'main'
+      },
+      {
+
+      },
+      {
+        path: 'missionsList',
+        component: MissionListComponent,
         outlet: 'main'
       }
     ]

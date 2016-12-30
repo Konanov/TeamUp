@@ -18,6 +18,8 @@ export class LoginPage {
 
   userIsRegistered: boolean = false;
 
+  showMissionModal: boolean = false;
+
   login(event, email, password) {
     event.preventDefault();
     let body = JSON.stringify({ email, password });
@@ -29,6 +31,9 @@ export class LoginPage {
             localStorage.setItem('password', response.json().password);
             if (response.json().currentMissionId != null) {
               localStorage.setItem('currentMissionId', response.json().currentMissionId);
+            } else {
+              this.showMissionModal = true;
+              this.router.navigate(['/content', { outlets: { main: 'missionsList/' } }]);
             }
             this.router.navigate(['index']);
           } else {

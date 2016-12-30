@@ -32,7 +32,7 @@ public class ParticipantController {
   }
 
   @RequestMapping(value="/all", method=RequestMethod.GET)
-  public List<Participant> getAllParticipants() {
+  public List<Participant> getCurrentParty() {
     return test.getAllParticipants();
   }
 
@@ -42,7 +42,7 @@ public class ParticipantController {
   }
 
   @RequestMapping(value="/byMission/{mission_id}", method=RequestMethod.GET)
-  public List<Participant> getAllParticipants(@PathVariable String mission_id) {
+  public List<Participant> getCurrentParty(@PathVariable String mission_id) {
     return test.getCurrentParty(mission_id);
   }
 }

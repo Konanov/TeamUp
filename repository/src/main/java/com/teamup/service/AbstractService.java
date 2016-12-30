@@ -34,8 +34,9 @@ public abstract class AbstractService {
    */
 
   public Participant save(Participant participant) {
-    this.db.save(participant);
-    return this.db.read(participant.getName());
+    Participant newParticipant = this.db.save(participant);
+    this.db.update("id", newParticipant.get_id().toHexString(), newParticipant.getEmail());
+    return this.db.read(participant.getEmail());
   }
 
   public Participant create(String name, String surname, String email, String password) {
