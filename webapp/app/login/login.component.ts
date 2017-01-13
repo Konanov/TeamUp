@@ -29,10 +29,10 @@ export class LoginPage {
           if (response.json().email != null && response.json().password != null) {
             localStorage.setItem('email', response.json().email);
             localStorage.setItem('password', response.json().password);
+            localStorage.setItem('user_id', response.json().user_id);
             if (response.json().currentMissionId != null) {
               localStorage.setItem('currentMissionId', response.json().currentMissionId);
             } else {
-              this.showMissionModal = true;
               this.router.navigate(['/content', { outlets: { main: 'missionsList/' } }]);
             }
             this.router.navigate(['index']);

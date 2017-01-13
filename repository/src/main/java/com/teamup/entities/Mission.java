@@ -11,15 +11,16 @@ public class Mission {
 
   @Id
   private ObjectId _id;
+  private String id;
   private ArrayList<Participant> participants = new ArrayList<>();
-  private Participant manager;
+  private String manager_id;
   private String description;
 
   public Mission() {
   }
 
-  public Mission(Participant manager, String description) {
-    this.manager = manager;
+  public Mission(String manager_id, String description) {
+    this.manager_id = manager_id;
     this.description = description;
   }
 
@@ -39,14 +40,6 @@ public class Mission {
     this.participants = participants;
   }
 
-  public Participant getManager() {
-    return manager;
-  }
-
-  public void setManager(Participant manager) {
-    this.manager = manager;
-  }
-
   public String getDescription() {
     return description;
   }
@@ -55,21 +48,19 @@ public class Mission {
     this.description = description;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Mission mission = (Mission) o;
-    if (!participants.equals(mission.participants)) return false;
-    if (!manager.equals(mission.manager)) return false;
-    return description.equals(mission.description);
+  public String getId() {
+    return id;
   }
 
-  @Override
-  public int hashCode() {
-    int result = participants.hashCode();
-    result = 31 * result + manager.hashCode();
-    result = 31 * result + description.hashCode();
-    return result;
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public String getManager_id() {
+    return manager_id;
+  }
+
+  public void setManager_id(String manager_id) {
+    this.manager_id = manager_id;
   }
 }

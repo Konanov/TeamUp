@@ -123,11 +123,24 @@ public abstract class AbstractMongo {
     this.ds.save(mission);
   }
 
+  public WriteResult updateMission(String field, String value, String mission_id) {
+    DBCollection collection = this.mongo.getDB("teamUp").getCollection("missions");
+    BasicDBObject newDocument = new BasicDBObject();
+    newDocument.append("$set", new BasicDBObject().append(field, value));
+    BasicDBObject searchQuery = new BasicDBObject().append("description", mission_id);
+    return collection.update(searchQuery, newDocument);
+  }
+
   public Mission read(Mission mission) {
     return ds.find(Mission.class).field("_id").equal(mission.get_id()).get();
   }
 
   public List<Participant> getCurrentParty(String mission_id) {
     return this.ds.find(Mission.class).field("_id").equal(new ObjectId(mission_id)).get().getParticipants();
+  }
+
+  public List<Mission> getUsersMissions(String manager_id) {
+    List<Mission> missions = this.ds.find(Mission.class).filter("manager_id", manager_id).asList();
+    return missions;
   }
 }

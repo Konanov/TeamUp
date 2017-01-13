@@ -35,7 +35,7 @@ public abstract class AbstractService {
 
   public Participant save(Participant participant) {
     Participant newParticipant = this.db.save(participant);
-    this.db.update("id", newParticipant.get_id().toHexString(), newParticipant.getEmail());
+    this.db.update("user_id", newParticipant.get_id().toHexString(), newParticipant.getEmail());
     return this.db.read(participant.getEmail());
   }
 
@@ -116,7 +116,16 @@ public abstract class AbstractService {
     db.save(mission);
   }
 
+  public boolean updateMission(String field, String value, String mission_id) {
+    return this.db.updateMission(field, value, mission_id) != null;
+  }
+
   public List<Participant> getCurrentParty(String mission_id) {
     return db.getCurrentParty(mission_id);
+  }
+
+  public List<Mission> getUsersMissions(String manager_id) {
+    List<Mission> missions = db.getUsersMissions(manager_id);
+    return missions;
   }
 }

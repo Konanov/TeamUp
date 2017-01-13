@@ -8,9 +8,8 @@ import {Mission} from "./mission.component";
 @Component({
   selector: 'missions-list',
   template: `
-  <div *ngIf="showMissionModal">
-  <button *ngFor="let mission of missions" class="btn btn-primary" type="button" data-toggle="modal" data-target="#missionModal" (click)="onSelectMission(mission)">
-  <div class="row"><img class="img-circle" style="height: 25px; width: 25px" src="{{avatarUrl}}{{mission.id}}"></div>
+        <div>
+  <button *ngFor="let mission of missions" class="btn btn-primary" type="button" data-toggle="modal" data-target="#missionModal" (click)="onSelect(mission)">
   <div class="row"><div class="label">{{mission.description}}</div></div>
   </button>
 </div>`,

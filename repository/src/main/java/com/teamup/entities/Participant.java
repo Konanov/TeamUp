@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
 
 @Entity("participants")
 @Repository
@@ -19,7 +18,7 @@ public class Participant implements Serializable {
 
   @Id
   private ObjectId _id;
-  private String id;
+  private String user_id;
   private String name;
   private String surname;
   private String email;
@@ -28,8 +27,7 @@ public class Participant implements Serializable {
   private String currentMissionId;
   @Embedded
   private List<Task> tasks = new ArrayList<>();
-  @Embedded
-  private ArrayBlockingQueue<Mission> missions = new ArrayBlockingQueue<>(6);
+  private ArrayList<String> missions = new ArrayList<>();
   @Transient
   private GridFSDBFile avatar;
   private List<Role> roles = new ArrayList<>();
@@ -134,12 +132,20 @@ public class Participant implements Serializable {
     this.currentMissionId = currentMissionId;
   }
 
-  public String getId() {
-    return id;
+  public String getUser_id() {
+    return user_id;
   }
 
-  public void setId(String id) {
-    this.id = id;
+  public void setUser_id(String user_id) {
+    this.user_id = user_id;
+  }
+
+  public ArrayList<String> getMissions() {
+    return missions;
+  }
+
+  public void setMissions(ArrayList<String> missions) {
+    this.missions = missions;
   }
 
   @Override
