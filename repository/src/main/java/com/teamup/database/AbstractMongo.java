@@ -140,7 +140,6 @@ public abstract class AbstractMongo {
   }
 
   public List<Mission> getUsersMissions(String manager_id) {
-    List<Mission> missions = this.ds.find(Mission.class).filter("manager_id", manager_id).asList();
-    return missions;
+    return this.ds.find(Mission.class).filter("manager_id", manager_id).asList();
   }
 }

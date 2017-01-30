@@ -125,7 +125,6 @@ public abstract class AbstractService {
   }
 
   public List<Mission> getUsersMissions(String manager_id) {
-    List<Mission> missions = db.getUsersMissions(manager_id);
-    return missions;
+    return db.getUsersMissions(manager_id);
   }
 }
